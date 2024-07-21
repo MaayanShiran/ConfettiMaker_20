@@ -121,30 +121,12 @@ public class MainActivity extends AppCompatActivity {
 
 ## Demo Videos
 
-## Demo Videos
+https://github.com/user-attachments/assets/c89209df-15b9-4c92-806e-d5e12e7d9afd
 
-<table>
-  <tr>
-    <td>
-      <video width="300" height="200" controls>
-        <source src="https://github.com/user-attachments/assets/c89209df-15b9-4c92-806e-d5e12e7d9afd" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </td>
-    <td>
-      <video width="300" height="200" controls>
-        <source src="https://github.com/user-attachments/assets/d5f79280-f70c-492e-ae8c-725188c42001" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </td>
-    <td>
-      <video width="300" height="200" controls>
-        <source src="https://github.com/user-attachments/assets/7c915d1c-a587-437f-92ba-b4b24b74de79" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </td>
-  </tr>
-</table>
+https://github.com/user-attachments/assets/d5f79280-f70c-492e-ae8c-725188c42001
+
+https://github.com/user-attachments/assets/7c915d1c-a587-437f-92ba-b4b24b74de79
+
 
 
 
