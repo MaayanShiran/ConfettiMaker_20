@@ -44,9 +44,11 @@ publishing {
             afterEvaluate {
                 from(components["release"])
             }
+            groupId = "com.github.MaayanShiran"
+            artifactId = "ConfettiMakerLibrary"
+            version = "1.00.07"
         }
     }
-
 }
 
 dependencies {
