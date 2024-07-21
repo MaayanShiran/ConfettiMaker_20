@@ -1,14 +1,16 @@
 package com.classy.confetti;
 
+
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
+
 import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,9 +19,8 @@ public class ConfettiView extends View {
 
     public static final int SHAPE_CIRCLE = 0;
     public static final int SHAPE_RECTANGLE = 1;
-    public static final int SHAPE_SNOWFLAKE = 2;
 
-    private List<Particle> particles;
+    private List<ConfettiParticle> confettiParticles;
     private Paint paint;
     private Random random;
     private boolean isAnimating;
@@ -35,41 +36,20 @@ public class ConfettiView extends View {
     private float maxSpeedX = 3;
     private float minSpeedY = 3;
     private float maxSpeedY = 6;
-    private float gravity = 0.5f; // Gravity effect
     private int shapeType = SHAPE_CIRCLE;
 
     public ConfettiView(Context context) {
         super(context);
-        init(null);
+        init();
     }
 
     public ConfettiView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        init();
     }
 
-    public ConfettiView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(attrs);
-    }
-
-    private void init(@Nullable AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ConfettiView);
-            confettiColor = a.getColor(R.styleable.ConfettiView_confettiColor, confettiColor);
-            useSolidColor = a.getBoolean(R.styleable.ConfettiView_useSolidColor, useSolidColor);
-            minSize = a.getFloat(R.styleable.ConfettiView_minSize, minSize);
-            maxSize = a.getFloat(R.styleable.ConfettiView_maxSize, maxSize);
-            minSpeedX = a.getFloat(R.styleable.ConfettiView_minSpeedX, minSpeedX);
-            maxSpeedX = a.getFloat(R.styleable.ConfettiView_maxSpeedX, maxSpeedX);
-            minSpeedY = a.getFloat(R.styleable.ConfettiView_minSpeedY, minSpeedY);
-            maxSpeedY = a.getFloat(R.styleable.ConfettiView_maxSpeedY, maxSpeedY);
-            gravity = a.getFloat(R.styleable.ConfettiView_gravity, gravity);
-            shapeType = a.getInt(R.styleable.ConfettiView_shapeType, shapeType);
-            a.recycle();
-        }
-
-        particles = new ArrayList<>();
+    private void init() {
+        confettiParticles = new ArrayList<>();
         paint = new Paint();
         random = new Random();
         isAnimating = false;
@@ -84,26 +64,17 @@ public class ConfettiView extends View {
         };
     }
 
-    public void startConfetti(int count, Class<? extends Particle> particleClass) {
-        particles.clear();
+    public void startConfetti(int count) {
+        confettiParticles.clear();
         for (int i = 0; i < count; i++) {
             int color = useSolidColor ? confettiColor : Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-            Particle particle = createParticle(particleClass, color);
-            particles.add(particle);
+            confettiParticles.add(new ConfettiParticle(
+                    getWidth(), getHeight(), random,
+                    color, minSize, maxSize,
+                    minSpeedX, maxSpeedX, minSpeedY, maxSpeedY, shapeType));
         }
         isAnimating = true;
         handler.post(updateRunnable);
-    }
-
-    private Particle createParticle(Class<? extends Particle> particleClass, int color) {
-        try {
-            float startX = random.nextFloat() * getWidth();
-            float startY = random.nextFloat() * getHeight();
-            return particleClass.getConstructor(float.class, float.class, int.class, float.class, float.class, float.class, float.class, float.class, float.class, Random.class)
-                    .newInstance(startX, startY, color, minSize, maxSize, minSpeedX, maxSpeedX, minSpeedY, maxSpeedY, random);
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to create particle", e);
-        }
     }
 
     public void stopConfetti() {
@@ -113,8 +84,8 @@ public class ConfettiView extends View {
 
     private void updateParticles() {
         if (isAnimating) {
-            for (Particle particle : particles) {
-                particle.update(getWidth(), getHeight(), gravity);
+            for (ConfettiParticle particle : confettiParticles) {
+                particle.update(getWidth(), getHeight());
             }
         }
     }
@@ -122,8 +93,16 @@ public class ConfettiView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (Particle particle : particles) {
-            particle.draw(canvas, paint);
+        for (ConfettiParticle particle : confettiParticles) {
+            paint.setColor(particle.color);
+            if (particle.shape == SHAPE_CIRCLE) {
+                canvas.drawCircle(particle.x, particle.y, particle.size, paint);
+            } else if (particle.shape == SHAPE_RECTANGLE) {
+                canvas.save();
+                canvas.rotate(particle.rotation, particle.x, particle.y);
+                canvas.drawRect(particle.x, particle.y, particle.x + particle.width, particle.y + particle.height, paint);
+                canvas.restore();
+            }
         }
     }
 
@@ -150,15 +129,40 @@ public class ConfettiView extends View {
         this.maxSpeedY = maxSpeedY;
     }
 
-    public void setGravity(float gravity) {
-        this.gravity = gravity;
-    }
-
     public void setShapeType(int shapeType) {
         this.shapeType = shapeType;
     }
 
-    public int getShapeType() {
-        return shapeType;
+    private static class ConfettiParticle {
+        float x, y, size, speedX, speedY, width, height, rotation;
+        int color, shape;
+        Random random;
+
+        ConfettiParticle(int width, int height, Random random, int color, float minSize, float maxSize, float minSpeedX, float maxSpeedX, float minSpeedY, float maxSpeedY, int shape) {
+            this.random = random;
+            this.shape = shape;
+            x = random.nextFloat() * width;
+            y = random.nextFloat() * height;
+            size = random.nextFloat() * (maxSize - minSize) + minSize;
+            speedX = random.nextFloat() * (maxSpeedX - minSpeedX) + minSpeedX;
+            speedY = random.nextFloat() * (maxSpeedY - minSpeedY) + minSpeedY;
+            this.color = color;
+
+            if (shape == SHAPE_RECTANGLE) {
+                this.width = size * (0.5f + random.nextFloat());
+                this.height = size * (0.5f + random.nextFloat());
+                this.rotation = random.nextFloat() * 360;
+            }
+        }
+
+        void update(int width, int height) {
+            x += speedX;
+            y += speedY;
+            if (y > height) {
+                y = 0;
+                x = random.nextFloat() * width;
+            }
+        }
     }
 }
+
