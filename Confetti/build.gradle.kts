@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     // Suppress incubating feature warnings
     @Suppress("UnstableApiUsage")
@@ -47,7 +47,7 @@ publishing {
             }
             groupId = "com.github.MaayanShiran"
             artifactId = "ConfettiMakerLibrary"
-            version = "1.00.11"
+            version = "1.00.12"
         }
     }
 }
