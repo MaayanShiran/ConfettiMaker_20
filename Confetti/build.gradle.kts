@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    `maven-publish`
+    id("maven-publish")
 }
 
 android {
@@ -46,7 +46,7 @@ publishing {
             }
             groupId = "com.github.MaayanShiran"
             artifactId = "ConfettiMakerLibrary"
-            version = "1.00.09"
+            version = "1.00.10"
         }
     }
 }
