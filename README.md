@@ -52,7 +52,7 @@ allprojects {
 Add the dependency to your module build.gradle file:
 ```
 dependencies {
-    implementation("com.github.MaayanShiran:ConfettiMakerLibrary:1.00.13")
+    implementation("com.github.MaayanShiran:ConfettiMakerLibrary:1.00.03")
 }
 ```
 ## Usage Example
