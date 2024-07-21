@@ -121,15 +121,21 @@ public class MainActivity extends AppCompatActivity {
 
 ## Demo Videos
 
-<div style="display: flex; gap: 10px;">
-  <a href="https://github.com/user-attachments/assets/c89209df-15b9-4c92-806e-d5e12e7d9afd">
-    <img src="https://via.placeholder.com/300x200.png?text=Video+1+Thumbnail" width="300" height="200" alt="Video 1 Thumbnail">
-  </a>
-  <a href="https://github.com/user-attachments/assets/d5f79280-f70c-492e-ae8c-725188c42001">
-    <img src="https://via.placeholder.com/300x200.png?text=Video+2+Thumbnail" width="300" height="200" alt="Video 2 Thumbnail">
-  </a>
-  <a href="https://github.com/user-attachments/assets/7c915d1c-a587-437f-92ba-b4b24b74de79">
-    <img src="https://via.placeholder.com/300x200.png?text=Video+3+Thumbnail" width="300" height="200" alt="Video 3 Thumbnail">
-  </a>
+## Demo Videos
+
+<div style="display: flex; justify-content: space-between;">
+  <video width="300" height="200" controls>
+    <source src="https://github.com/user-attachments/assets/c89209df-15b9-4c92-806e-d5e12e7d9afd" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video width="300" height="200" controls>
+    <source src="https://github.com/user-attachments/assets/d5f79280-f70c-492e-ae8c-725188c42001" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video width="300" height="200" controls>
+    <source src="https://github.com/user-attachments/assets/7c915d1c-a587-437f-92ba-b4b24b74de79" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </div>
+
 
