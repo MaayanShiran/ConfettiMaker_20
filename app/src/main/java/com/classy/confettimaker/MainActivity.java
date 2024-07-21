@@ -4,11 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.classy.confetti.ConfettiView;
 import com.classy.confetti.Particle;
-import com.classy.confetti.RectangleParticle;
-import com.classy.confetti.SnowflakeParticle;
+
 
 public class MainActivity extends AppCompatActivity {
 
