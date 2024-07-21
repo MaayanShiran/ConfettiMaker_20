@@ -47,7 +47,7 @@ publishing {
             }
             groupId = "com.github.MaayanShiran"
             artifactId = "ConfettiMakerLibrary_20"
-            version = "1.00.00"
+            version = "1.00.01"
         }
     }
 }

@@ -7,7 +7,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
-confettilibrary = "1.00.00"
+confettilibrary = "1.00.01"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }

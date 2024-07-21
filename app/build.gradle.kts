@@ -34,12 +34,13 @@ android {
 dependencies {
     //implementation(project(":Confetti"))
     implementation(libs.confettilibrary)
-    //implementation("com.github.MaayanShiran:ConfettiMakerLibrary:1.00.13")
+    //implementation("com.github.MaayanShiran:ConfettiMaker_20:1.00.00")
 
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+   // implementation(project(":Confetti"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
