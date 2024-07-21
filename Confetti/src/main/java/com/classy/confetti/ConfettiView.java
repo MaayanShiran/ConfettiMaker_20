@@ -19,6 +19,7 @@ public class ConfettiView extends View {
 
     public static final int SHAPE_CIRCLE = 0;
     public static final int SHAPE_RECTANGLE = 1;
+    public static final int SHAPE_SNOW = 2;
 
     private List<ConfettiParticle> confettiParticles;
     private Paint paint;
@@ -64,7 +65,7 @@ public class ConfettiView extends View {
         };
     }
 
-    public void startConfetti(int count) {
+    public void startConfetti(int count, Class<Particle> snowflakeParticleClass) {
         confettiParticles.clear();
         for (int i = 0; i < count; i++) {
             int color = useSolidColor ? confettiColor : Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
@@ -103,7 +104,22 @@ public class ConfettiView extends View {
                 canvas.drawRect(particle.x, particle.y, particle.x + particle.width, particle.y + particle.height, paint);
                 canvas.restore();
             }
+            else if (particle.shape == SHAPE_SNOW){ //SHAPE_SNOW
+                drawSnowflake(canvas, particle.x, particle.y, particle.size, particle.rotation);
+
+            }
         }
+    }
+
+    private void drawSnowflake(Canvas canvas, float x, float y, float size, float rotation) {
+        canvas.save();
+        canvas.rotate(rotation, x, y);
+        paint.setStrokeWidth(size / 5);
+        for (int i = 0; i < 6; i++) {
+            canvas.drawLine(x, y - size, x, y + size, paint);
+            canvas.rotate(60, x, y);
+        }
+        canvas.restore();
     }
 
     public void setConfettiColor(int color) {

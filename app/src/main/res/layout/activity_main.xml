@@ -8,16 +8,7 @@
         android:id="@+id/confettiView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:confettiColor="#FF0000"
-        app:useSolidColor="true"
-        app:minSize="5"
-        app:maxSize="20"
-        app:minSpeedX="-5"
-        app:maxSpeedX="5"
-        app:minSpeedY="3"
-        app:maxSpeedY="10"
-        app:gravity="0.5"
-        app:shapeType="snowflake" />
+   />
 
     <Button
         android:id="@+id/startButton"
