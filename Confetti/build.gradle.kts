@@ -46,7 +46,7 @@ publishing {
                 from(components["release"])
             }
             groupId = "com.github.MaayanShiran"
-            artifactId = "ConfettiMakerLibrary"
+            artifactId = "ConfettiMakerLibrary_20"
             version = "1.00.00"
         }
     }
