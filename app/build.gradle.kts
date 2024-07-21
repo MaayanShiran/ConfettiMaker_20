@@ -33,6 +33,8 @@ android {
 
 dependencies {
     implementation(project(":Confetti"))
+    //implementation("com.github.MaayanShiran:ConfettiMakerLibrary:1.00.04")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

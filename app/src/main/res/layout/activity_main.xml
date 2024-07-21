@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <com.classy.confetti.ConfettiView
         android:id="@+id/confettiView"
         android:layout_width="match_parent"
