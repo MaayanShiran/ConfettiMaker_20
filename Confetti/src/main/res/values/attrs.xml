@@ -1,0 +1,18 @@
+<resources>
+    <declare-styleable name="ConfettiView">
+        <attr name="confettiColor" format="color" />
+        <attr name="useSolidColor" format="boolean" />
+        <attr name="minSize" format="float" />
+        <attr name="maxSize" format="float" />
+        <attr name="minSpeedX" format="float" />
+        <attr name="maxSpeedX" format="float" />
+        <attr name="minSpeedY" format="float" />
+        <attr name="maxSpeedY" format="float" />
+        <attr name="gravity" format="float" />
+        <attr name="shapeType">
+            <enum name="circle" value="0" />
+            <enum name="rectangle" value="1" />
+            <enum name="snowflake" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
